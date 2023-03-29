@@ -150,8 +150,48 @@ def select_10(student_name, teacher_name):
     for subject in subjects:
         print(f"{subject}")
 
+def select_11(student_name, teacher_name):
+    avg_grade = (
+        session.query(
+            func.avg(Grade.grade).label('avg_grade')
+        )
+        .join(Student, Student.id == Grade.student_id)
+        .join(Subject, Subject.id == Grade.subject_id)
+        .join(Teacher, Teacher.id == Subject.teacher_id)
+        .filter(Student.name==student_name)
+        .filter(Teacher.name == teacher_name)
+        .all()
+    )
+    print(f"{avg_grade}")
 
-select_10('Anna Moran', 'Gina Atkins')
+def select_12(group_name, subject_name):
+    last_date_received = (
+        session.query(func.max(Grade.date_received))
+        .join(Student)
+        .join(Group)
+        .join(Subject, Student.group_id == Group.id)
+        .filter(Group.name == group_name)
+        .filter(Subject.name == subject_name)
+        .scalar()
+    )
+
+    results = (
+        session.query(Student.name, Grade.grade, Grade.date_received)
+        .select_from(Student)
+        .join(Group)
+        .join(Subject, Student.group_id == Group.id)
+        .join(Grade)
+        .filter(Group.name == group_name)
+        .filter(Subject.name == subject_name)
+        .filter(Grade.date_received == last_date_received)
+        .all()
+    )
+
+    for result in results:
+        print(result)
+
+
+select_12('former Group', 'agree')
 
 
 
