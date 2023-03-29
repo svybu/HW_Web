@@ -72,5 +72,5 @@ class Test_inf():
         self.add_grades()
 
 
-test = Test_inf()
-test.add_all()
+#test = Test_inf()
+#test.add_all()

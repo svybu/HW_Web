@@ -51,5 +51,3 @@ class Grade(Base):
     grade = Column(Integer, nullable=False)
     date_received = Column(Date, default=datetime.datetime.now,nullable=False)
 
-#reg = registry()
-#reg.configure(bind=engine)
