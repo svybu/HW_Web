@@ -1,6 +1,6 @@
-from sqlalchemy import create_engine, text
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from faker import  Faker
+from faker import Faker
 from model import Group, Grade, Student, Subject, Teacher
 
 host = 'localhost'
