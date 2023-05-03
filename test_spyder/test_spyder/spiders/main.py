@@ -43,21 +43,3 @@ if __name__ == '__main__':
     process.crawl(MainSpider)
     process.start()
 
-    with open('authors.json', 'w') as f:
-        authors_list = []
-        with open('quotes.json') as quotes_file:
-            quotes_list = json.load(quotes_file)
-            for quote in quotes_list:
-                author = {'fullname': quote['author'], 'born_date': None, 'born_location': None, 'description': None}
-                if author not in authors_list:
-                    authors_list.append(author)
-        for author in authors_list:
-            f.write(json.dumps(author) + '\n')
-    print('saved')
-
-    with open('quotes.json', 'w') as f:
-        with open('quotes.json') as quotes_file:
-            quotes_list = json.load(quotes_file)
-            for quote in quotes_list:
-                f.write(json.dumps(quote) + '\n')
-    print('saved')

@@ -94,6 +94,6 @@ FEED_FORMAT = "csv"
 FEED_URI = "result.csv"
 
 ITEM_PIPELINES = {
-    'authors_pipeline.AuthorsPipeline': 400,
-    'quotes_pipeline.QuotesPipeline': 300,
+    'authors_pipeline.AuthorsPipeline': 300,
+    'quotes_pipeline.QuotesPipeline': 400,
 }
