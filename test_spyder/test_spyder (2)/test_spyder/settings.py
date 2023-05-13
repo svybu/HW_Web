@@ -87,13 +87,12 @@ ROBOTSTXT_OBEY = True
 # HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
 
 # Set settings whose default value is deprecated to a future-proof value
-REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
-TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
-FEED_EXPORT_ENCODING = "utf-8"
-FEED_FORMAT = "csv"
-FEED_URI = "result.csv"
-
+# REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
+# TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
+# FEED_EXPORT_ENCODING = "utf-8"
+# FEED_FORMAT = "json"
+# FEED_URI = "result.json"
+#
 ITEM_PIPELINES = {
-    'authors_pipeline.AuthorsPipeline': 300,
-    'quotes_pipeline.QuotesPipeline': 200,
+    'common_pipeline.CommonPipeline': 100
 }
