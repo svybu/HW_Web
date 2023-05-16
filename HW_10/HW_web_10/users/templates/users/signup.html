@@ -1,0 +1,57 @@
+{% extends "quotes/base.html" %}
+
+{% block main %}
+<h3>SignUp</h3>
+{% if form.errors %}
+<span class="alert alert-danger" role="alert">{{ form.non_field_errors }}</span>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <div class='row mb-3'>
+        <label>Username</label>
+        {{ form.username }}
+        {% if form.errors %}
+        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
+        {% endif %}
+    </div>
+    <div class='row mb-3'>
+        <label>Firstname</label>
+        {{ form.firstname }}
+        {% if form.errors %}
+        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
+        {% endif %}
+    </div>
+    <div class='row mb-3'>
+        <label>Lastname</label>
+        {{ form.lastname }}
+        {% if form.errors %}
+        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
+        {% endif %}
+    </div>
+    <div class='row mb-3'>
+        <label>Email</label>
+        {{ form.email }}
+        {% if form.errors %}
+        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
+        {% endif %}
+    </div>
+    <div class='row mb-3'>
+        <label>Password1</label>
+        {{ form.password1 }}
+        {% if form.errors %}
+        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
+        {% endif %}
+    </div>
+    <div class='row mb-3'>
+        <label>Repeat password</label>
+        {{ form.password2 }}
+        {% if form.errors %}
+        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
+        {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="reset" class="btn btn-info">Reset</button>
+</form>
+
+
+{% endblock %}
