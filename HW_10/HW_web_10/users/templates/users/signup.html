@@ -15,20 +15,6 @@
         {% endif %}
     </div>
     <div class='row mb-3'>
-        <label>Firstname</label>
-        {{ form.firstname }}
-        {% if form.errors %}
-        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
-        {% endif %}
-    </div>
-    <div class='row mb-3'>
-        <label>Lastname</label>
-        {{ form.lastname }}
-        {% if form.errors %}
-        <span class="alert alert-danger" role="alert">{{ form.errors.description }}</span>
-        {% endif %}
-    </div>
-    <div class='row mb-3'>
         <label>Email</label>
         {{ form.email }}
         {% if form.errors %}
