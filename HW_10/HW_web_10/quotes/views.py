@@ -17,15 +17,25 @@ def main(request):
     return render(request, 'quotes/base.html', context)
 
 
-def author_detail(request):
-    author = Author.objects.filter(id=request.quote.author.id)
+def author_detail(request, id):
+    author = Author.objects.get(pk=id)
 
     context = {
         'author': author
     }
 
-    return render(request, 'author_detail.html', context)
+    return render(request, 'quotes/author_detail.html', context)
 
+
+def find_by_tag(request, _id):
+    per_page = 5
+    if isinstance(_id, int):
+        quotes = Quote.objects.filter(tags=_id).all()
+    elif isinstance(_id, str):
+        _id = Tag.objects.filter(name=_id).first()
+        quotes = Quote.objects.filter(tags=_id.id).all()
+    context = {'quotes': quotes}
+    return render(request, 'quotes/base.html', context)
 
 class AuthorCreateView(View):
     form_class = AuthorForm
