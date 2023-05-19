@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.contrib.auth.decorators import login_required
-from .forms import AuthorForm
+from .forms import AuthorForm, QuoteForm
 from .models import Author, Quote, Tag
 
 
@@ -19,7 +19,6 @@ def main(request):
 
 def author_detail(request, id):
     author = Author.objects.get(pk=id)
-
     context = {
         'author': author
     }
@@ -37,7 +36,8 @@ def find_by_tag(request, _id):
     context = {'quotes': quotes}
     return render(request, 'quotes/base.html', context)
 
-class AuthorCreateView(View):
+
+"""class AuthorCreateView(View):
     form_class = AuthorForm
     template_name = 'quotes/author_add.html'
 
@@ -50,7 +50,29 @@ class AuthorCreateView(View):
         if form.is_valid():
             author = form.save()
             return redirect('author_detail', pk=author.pk)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form})"""
 
 
-author_add = login_required(AuthorCreateView.as_view())
+@login_required
+def add_author(request):
+    if request.method == 'POST':
+        form = AuthorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'quotes/base.html', )
+    else:
+        form = AuthorForm()
+    return render(request, 'quotes/author_add.html', {'form': form})
+
+
+@login_required
+def add_quote(request):
+    if request.method == 'POST':
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'quotes/base.html')
+
+    else:
+        form = QuoteForm()
+    return render(request, 'quotes/add_quote.html', {'form': form})
