@@ -28,3 +28,20 @@ class ContactResponse(ContactBase):
 
 class ContactListResponse(BaseModel):
     contacts: List[ContactResponse]
+
+
+class UserAuthenticate(BaseModel):
+    email: str
+    password: str
+
+
+# Модель для створення нового користувача
+class UserCreate(BaseModel):
+    email: str
+    password: str
+
+
+# Модель для JWT токена
+class Token(BaseModel):
+    access_token: str
+    token_type: str
