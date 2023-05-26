@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from starlette import status
 from starlette.responses import JSONResponse
-
+from passlib.context import CryptContext
 from database.db import get_db
 from database.models import User, Contact
 from shemas import ContactCreate, ContactUpdate
@@ -22,10 +22,6 @@ class UserModel(BaseModel):
     password: str
 
 
-# Аутентифікація та отримання JWT токена
-from passlib.context import CryptContext
-
-# Створення об'єкту CryptContext для хешування паролів
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
@@ -86,7 +82,6 @@ async def read_item(current_user: User = Depends(get_current_user)):
     return {"message": 'secret router', "owner": current_user.email}
 
 
-# Маршрут для створення нового контакту (доступ обмежений)
 @app.post("/contacts/")
 async def create_contact(
         contact: ContactCreate,
@@ -107,7 +102,6 @@ async def create_contact(
     return db_contact
 
 
-# Маршрут для отримання списку всіх контактів (доступ обмежений)
 @app.get("/contacts/")
 async def get_contacts(
         current_user: User = Depends(get_current_user),
@@ -117,7 +111,6 @@ async def get_contacts(
     return {"contacts": contacts}
 
 
-# Маршрут для отримання інформації про окремий контакт (доступ обмежений)
 @app.get("/contacts/{contact_id}")
 async def get_contact(
         contact_id: int,
@@ -130,7 +123,6 @@ async def get_contact(
     return contact
 
 
-# Маршрут для оновлення контакту (доступ обмежений)
 @app.put("/contacts/{contact_id}")
 async def update_contact(
         contact_id: int,
@@ -153,7 +145,6 @@ async def update_contact(
     return db_contact
 
 
-# Маршрут для видалення контакту (доступ обмежений)
 @app.delete("/contacts/{contact_id}")
 async def delete_contact(
         contact_id: int,
