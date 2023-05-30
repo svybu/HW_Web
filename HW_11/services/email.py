@@ -4,15 +4,20 @@ from fastapi_mail import FastMail, MessageSchema, ConnectionConfig, MessageType
 from fastapi_mail.errors import ConnectionErrors
 from pydantic import EmailStr
 
+from dotenv import load_dotenv
+import os
+
 from services.auth import auth_service
 
+load_dotenv()
+
 conf = ConnectionConfig(
-    MAIL_USERNAME="svibu_dev@meta.ua",
-    MAIL_PASSWORD="3Zi3zqajub",
-    MAIL_FROM=EmailStr("svibu_dev@meta.ua"),
+    MAIL_USERNAME=os.getenv('MAIL_USERNAME'),
+    MAIL_PASSWORD=os.getenv('MAIL_PASSWORD'),
+    MAIL_FROM=os.getenv('MAIL_FROM'),
     MAIL_PORT=465,
-    MAIL_SERVER="smtp.meta.ua",
-    MAIL_FROM_NAME="svibu_dev",
+    MAIL_SERVER=os.getenv('MAIL_SERVER'),
+    MAIL_FROM_NAME=os.getenv('MAIL_FROM_NAME'),
     MAIL_STARTTLS=False,
     MAIL_SSL_TLS=True,
     USE_CREDENTIALS=True,
