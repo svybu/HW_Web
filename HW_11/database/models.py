@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from .db import Base
 
@@ -9,9 +9,10 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String)
+    avatar = Column(String)
 
     contacts = relationship("Contact", back_populates="user")
-
+    confirmed = Column(Boolean, default=False)
 
 class Contact(Base):
     __tablename__ = "contacts"

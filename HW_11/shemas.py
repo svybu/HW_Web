@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel, Field
 
 
@@ -39,7 +39,7 @@ class UserAuthenticate(BaseModel):
 class UserCreate(BaseModel):
     email: str
     password: str
-
+    avatar: Optional[str]
 
 # Модель для JWT токена
 class Token(BaseModel):
